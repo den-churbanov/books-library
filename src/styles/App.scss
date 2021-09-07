@@ -1,0 +1,91 @@
+@import "null";
+@import "fonts";
+@import "colors";
+
+$breakpoint-xs: 320px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+@mixin flex-display($justify, $align, $iswrap, $direction) {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: flex;
+    -webkit-justify-content: $justify;
+    justify-content: $justify;
+    -webkit-align-items: $align;
+    align-items: $align;
+    flex-flow: $iswrap $direction;
+}
+
+body {
+    min-width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: $medium-gray;
+}
+
+#app_container {
+    width: 90%;
+    margin: 0 auto;
+    height: 100%;
+    @include flex-display(stretch, center, nowrap, row);
+}
+
+
+@import "components/UI/Select";
+@import "components/UI/Button";
+@import "components/Loader";
+@import "components/Alert";
+@import "components/Book";
+@import "components/Library";
+@import "components/Aside";
+
+@media screen and (max-width: $breakpoint-lg) {
+    #app_container {
+        width: 100%;
+        margin: 0;
+        @include flex-display(stretch, center, nowrap, row);
+    }
+}
+
+@media screen and (max-width: $breakpoint-md) {
+    aside.aside{
+        padding: 1rem 0.5rem  1rem 0;
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 320px;
+        -webkit-transition: all 600ms ease-in-out;
+        -moz-transition: all 600ms ease-in-out;
+        -o-transition: all 600ms ease-in-out;
+        transition: all 600ms ease-in-out;
+        transform: translateX(320px);
+    
+        .bars{
+            display: block;
+        }
+        main.book_info{
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+        
+        &_active {
+    
+            .bars{
+                top: 15px;
+                left: 15px;
+            }
+            transform: translateX(0);
+        }
+    }
+    
+    .library {
+        flex: 0 0 100%;
+    }
+}

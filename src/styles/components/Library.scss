@@ -1,0 +1,152 @@
+.library {
+    flex: 0 0 65%;
+    height: 100%;
+    
+    &__container {
+        width: 100%;
+        height: 100%;
+        padding: 1rem 0.5rem 1rem 1rem;
+        @include flex-display(stretch, stretch, nowrap, column);
+    }
+    
+    &__header, &__content {
+        background: $light-gray;
+        border-radius: 6px;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15),
+                    0 -2px 2px rgba(0, 0, 0, 0.15),
+                    2px 0 2px rgba(0, 0, 0, 0.15),
+                    -2px 0 2px rgba(0, 0, 0, 0.15);
+    }
+    
+    &__header {
+        flex: 0 0 15%;
+        margin-bottom: 0.6rem;
+        padding: 0.4rem 0.6rem;
+        @include flex-display(flex-start, flex-end, wrap, row);
+    }
+    
+    &__content {
+        flex: 1 1 80%;
+        padding: 0.2rem 0.2rem 0.7rem;
+        @include flex-display(flex-start, center, nowrap, column);
+    
+        .shelf {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 20px;
+        
+            &_container {
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-end;
+                padding: 10px 25px 22px;
+                position: relative;
+            }
+        
+            &_wrapper {
+                -webkit-perspective: 1400px;
+                perspective: 1400px;
+            }
+        
+            &_content {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                -webkit-transform-style: preserve-3d;
+                transform-style: preserve-3d;
+                -webkit-transition: -webkit-transform 1000ms;
+                transition: transform 1000ms;
+                -webkit-transform: rotate3d(1, 0, 0, -2deg);
+                transform: rotate3d(1, 0, 0, -2deg);
+            
+                &__front,
+                &__top {
+                    position: absolute;
+                    width: 100%;
+                    background-color: #795328;
+                    box-shadow: inset -5px -10px 5px rgba(0, 0, 0, 0.1);
+                }
+            
+                &__front {
+                    height: 20px;
+                    border-radius: 0 0 2px 2px;
+                }
+            
+                &__top {
+                    -webkit-transform-style: preserve-3d;
+                    transform-style: preserve-3d;
+                    -webkit-transform-origin: 0 0;
+                    transform-origin: 0 0;
+                    height: 150px;
+                    -webkit-transition: -webkit-transform .5s;
+                    transition: transform .5s;
+                    -webkit-transform: rotate3d(1, 0, 0, -90deg);
+                    transform: rotate3d(1, 0, 0, -90deg);
+                    background-color: #573916;
+                    box-shadow: inset 5px 10px 5px rgba(255, 255, 255, 0.1);
+                }
+            }
+        }
+    }
+    
+    &__button{
+        @include button-mixin;
+        padding: 0.3rem 0.6rem;
+        margin-top: 0.2rem;
+    
+        &_error{
+            color: $primary-error;
+            border-color: $primary-error;
+            
+            @media screen and (min-width: $breakpoint-lg) {
+                &:hover:enabled {
+                    background: $primary-error;
+                    color: $white;
+                }
+            }
+    
+            &:active:enabled {
+                background: $primary-error;
+                color: $white;
+            }
+        }
+    }
+    
+    &__input {
+        width: 40%;
+        border: 2px solid $primary;
+        border-radius: 5px;
+        font-size: 0.6rem;
+        letter-spacing: 0.02rem;
+        color: $primary;
+        min-width: 160px;
+        max-width: 200px;
+        padding: 0.3rem 0.7rem 0.3rem 0.4rem;
+        background: transparent;
+        transition: border-color 0.2s;
+        margin-right: 0.2rem;
+        margin-top: 0.2rem;
+        
+        &::placeholder {
+            color: $primary;
+        }
+        
+        &:focus{
+            &::placeholder {
+                opacity: 0.7;
+            }
+        }
+        &:required, &:invalid {
+            box-shadow: none;
+        }
+        
+    }
+}
+
+.select {
+    margin-top: 0.2rem;
+    margin-right: 0.4rem;
+}

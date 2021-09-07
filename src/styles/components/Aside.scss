@@ -1,0 +1,215 @@
+aside.aside {
+    flex: 0 0 35%;
+    height: 100%;
+    align-self: flex-start;
+    padding: 1rem 1rem 1rem 0.5rem;
+    position: relative;
+    
+    $bar-length: 20px;
+    $bar-thickness: 3px;
+    
+    .bars {
+        display: none;
+        position: absolute;
+        top: 15px;
+        left: -45px;
+        width: $bar-length;
+        height: $bar-length;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 20;
+        -webkit-transition: all 600ms ease-in-out;
+        -moz-transition: all 600ms ease-in-out;
+        -o-transition: all 600ms ease-in-out;
+        transition: all 600ms ease-in-out;
+        
+        &.is-active {
+            
+            span {
+                transform: rotate(-45deg);
+                
+                &:before,
+                &:after {
+                    transform: translateX(0) rotate(-90deg);
+                }
+            }
+        }
+        
+        & > span {
+            position: absolute;
+            width: $bar-length;
+            height: $bar-thickness;
+            border-radius: 100px;
+            transition: 0.2s ease-in-out;
+            background: $primary;
+            top: 49%;
+            
+            &::before,
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                will-change: transform;
+                width: $bar-length;
+                height: $bar-thickness;
+                background: $primary;
+                border-radius: 100px;
+                transition: 0.2s ease-in-out;
+            }
+            
+            &:before {
+                transform: translateY(-7px);
+            }
+            
+            &:after {
+                transform: translateY(7px);
+            }
+            
+        }
+    }
+    
+    .book_info {
+        position: fixed;
+        border-radius: 6px;
+        padding: 0.4rem;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15),
+        0 -2px 2px rgba(0, 0, 0, 0.15),
+        2px 0 2px rgba(0, 0, 0, 0.15),
+        -2px 0 2px rgba(0, 0, 0, 0.15);
+        background: $light-gray;
+        width: 30%;
+        height: 350px;
+        @include flex-display(center, stretch, nowrap, column);
+        
+        h3 {
+            text-align: center;
+            padding: 0.2rem;
+            color: $primary;
+        }
+        
+        &__wrapper {
+            flex: 1 1 100%;
+            padding: 0 0.3rem;
+    
+            ul.info{
+                font-size: 0.55rem;
+                @include flex-display(stretch, stretch, nowrap, column);
+        
+                span{
+                    flex: 1 1 70%;
+                    font-weight: 600;
+                    text-align: left;
+                }
+                p{
+                    flex: 1 1 50%;;
+                    text-align: right;
+                    font-size: 0.55rem;
+                }
+        
+                li{
+                    @include flex-display(space-between, center, nowrap, row);
+                    line-height: 0.65rem;
+                    vertical-align: middle;
+                    padding-bottom: 0.2rem;
+                    min-height: 2rem;
+                }
+            }
+            
+            .buttons_wrapper{
+                @include flex-display(space-between, center, wrap, row);
+            }
+        }
+        
+    }
+    
+}
+
+//alert style override
+.blur_window {
+    .alert {
+        &__content {
+            flex: 1 0 80%;
+            align-self: stretch;
+            padding: 0 0.2em 0.2em;
+            
+            p.error{
+                font-size: 0.6rem;
+                font-weight: 600;
+            }
+            
+            span.error {
+                display: block;
+                color: $primary-error;
+                font-size: 0.45rem;
+                margin-bottom: 0.4rem;
+                letter-spacing: 0.1em;
+                font-weight: 600;
+            }
+        }
+        
+        &_input{
+            width: 100%;
+            max-width: 300px;
+            margin-right: 0;
+            margin-bottom: 0.3rem;
+            transition: all 400ms ease-out;
+            
+            &_not_valid{
+                border-color: $primary-error;
+                color: $primary-error;
+                &::placeholder{
+                    color: $primary-error;
+                }
+            }
+        }
+    }
+}
+
+.button{
+    @include button-mixin;
+    max-width: 190px;
+    min-width: 150px;
+    width: 60%;
+    margin: 0.2rem auto 0;
+    padding: 0.3rem 0.2rem;
+    
+    &_error{
+        color: $primary-error;
+        border-color: $primary-error;
+        min-width: 100px;
+        width: 45%;
+        
+        @media screen and (min-width: $breakpoint-lg) {
+            &:hover:enabled {
+                background: $primary-error;
+                color: $white;
+            }
+        }
+        
+        &:active:enabled {
+            background: $primary-error;
+            color: $white;
+        }
+    }
+    
+    &_warning{
+        color: $primary-warning;
+        border-color: $primary-warning;
+        min-width: 100px;
+        width: 45%;
+        
+        @media screen and (min-width: $breakpoint-lg) {
+            &:hover:enabled {
+                background: $primary-warning;
+                color: $white;
+            }
+        }
+        
+        &:active:enabled {
+            background: $primary-warning;
+            color: $white;
+        }
+    }
+}

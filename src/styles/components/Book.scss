@@ -1,0 +1,145 @@
+$height: 200px;
+$item-margin-right:10px;
+$left-side-width: 40px;
+$front-back-side-width: 150px;
+
+.book {
+    
+    &_item {
+        position: relative;
+        display: inline-block;
+        margin-right: $item-margin-right;
+        max-width: $left-side-width;
+        -webkit-transition: max-width 0.2s;
+        transition: max-width 1s;
+        z-index: 20;
+        flex: 0 0 100%;
+        cursor: pointer;
+        
+        &_active{
+            max-width: $front-back-side-width;
+            .book_content{
+                -webkit-transform: rotate3d(0, 1, 0, 0deg);
+                transform: rotate3d(0, 1, 0, 0deg);
+            }
+        }
+    }
+    
+    &_wrapper {
+        position: relative;
+        max-width: 100%;
+        height: $height;
+        z-index: 1;
+        -webkit-perspective: 1400px;
+        perspective: 1400px;
+        
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    
+    &_content {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-transition: -webkit-transform 1000ms;
+        transition: transform 1000ms;
+        -webkit-transform: rotate3d(0, 1, 0, 90deg);
+        transform: rotate3d(0, 1, 0, 90deg);
+        
+        & > div,
+        &__front > div {
+            display: block;
+            position: absolute;
+        }
+        
+        &__front,
+        &__left,
+        &__back {
+            background-color: $primary;
+        }
+        
+        &__front {
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transform-origin: 0 50%;
+            transform-origin: 0 50%;
+            -webkit-transition: -webkit-transform .5s;
+            transition: transform .5s;
+            -webkit-transform: translate3d(0, 0, 20px);
+            transform: translate3d(0, 0, 20px);
+            z-index: 15;
+            border-radius: 0 3px 3px 0;
+            
+            .front_cover {
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                border-radius: 0 3px 3px 0;
+                box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.1);
+                background-repeat: no-repeat;
+                background-size: cover;
+                
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 10px;
+                    bottom: 0;
+                    width: 3px;
+                    background: rgba(0, 0, 0, 0.08);
+                    box-shadow: 1px 0 3px rgba(255, 255, 255, 0.15);
+                }
+            }
+        }
+        
+        &__front,
+        &__back,
+        &__front > div {
+            width: $front-back-side-width;
+            height: 100%;
+        }
+        
+        &__left {
+            width: $left-side-width;
+            left: calc(-#{$left-side-width}/2);
+            height: 100%;
+            -webkit-transform: rotate3d(0, 1, 0, -90deg);
+            transform: rotate3d(0, 1, 0, -90deg);
+            
+            h2 {
+                width: $height;
+                height: $left-side-width;
+                padding: 0.1rem;
+                font-size: 0.5rem;
+                text-align: center;
+                letter-spacing: 0.02rem;
+                overflow: hidden;
+                -webkit-transform-origin: 0 0;
+                -moz-transform-origin: 0 0;
+                transform-origin: 0 0;
+                -webkit-transform: rotate(90deg) translateY(-$left-side-width);
+                transform: rotate(90deg) translateY(-$left-side-width);
+            }
+        }
+        
+        &__back {
+            -webkit-transform: rotate3d(0, 1, 0, -180deg) translate3d(0, 0, calc(#{$left-side-width}/2));
+            transform: rotate3d(0, 1, 0, -180deg) translate3d(0, 0, calc(#{$left-side-width}/2));
+            border-radius: 3px 0 0 3px;
+            box-shadow: inset -4px 0 10px rgba(0, 0, 0, 0.1);
+            
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 10px;
+                bottom: 0;
+                width: 3px;
+                background: rgba(0, 0, 0, 0.06);
+                box-shadow: 1px 0 3px rgba(255, 255, 255, 0.1);
+            }
+        }
+    }
+}
